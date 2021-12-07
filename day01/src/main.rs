@@ -15,7 +15,6 @@ fn main() {
 
         let mut increased_sum_count = 0;
         let mut last_sum = 0;
-        let mut sum_count = 0;
         for line in lines {
             if let Ok(value) = line {
                 let depth = value.parse::<i32>().unwrap();
@@ -24,17 +23,15 @@ fn main() {
                 first_measure = depth;
                 let sum = third_measure + second_measure + first_measure;
 
-                println!("first: {}, second: {}, third: {}, sum: {}, increased_sum_count: {}, last_sum: {}, sum_count: {}", 
-                first_measure, second_measure, third_measure, sum, increased_sum_count, last_sum, sum_count);
+                // println!("first: {}, second: {}, third: {}, sum: {}, increased_sum_count: {}, last_sum: {}", 
+                // first_measure, second_measure, third_measure, sum, increased_sum_count, last_sum);
 
-                if sum_count == 2 {
+                if first_measure != 0 && second_measure != 0 && third_measure != 0 {
                     if sum > last_sum {
                         increased_sum_count += 1;
                     }
                     last_sum = sum;
-                    sum_count = 0;
                 }
-                sum_count += 1;
 
                 //println!("depth: {}, last_depth: {}, increased_count: {}", depth, last_depth, increased_count);
                 if depth > last_depth {
@@ -45,7 +42,7 @@ fn main() {
                 }
             }
         }
-        println!("Total sum increases: {}", increased_sum_count);
+        println!("Total sum increases: {}", increased_sum_count - 1);
         println!("Total increases: {}", increased_count - 1);
     }
 }
