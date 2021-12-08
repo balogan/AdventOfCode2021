@@ -5,6 +5,7 @@ use std::path::Path;
 fn main() {
     let mut horizontal = 0;
     let mut depth = 0;
+    let mut aim = 0;
     let mut forward_flag = false;
     let mut down_flag = false;
     let mut up_flag = false;
@@ -20,22 +21,22 @@ fn main() {
                         "forward" => forward_flag = true,
                         "up" => up_flag = true,
                         "down" => down_flag = true,
-                        _ => 
+                        _ => {
                             if forward_flag == true {
                                 let change = part.parse::<i32>().unwrap();
                                 horizontal += change;
+                                depth += aim * change;
                                 forward_flag = false;
-                            }
-                            else if up_flag == true {
+                            } else if up_flag == true {
                                 let change = part.parse::<i32>().unwrap();
-                                depth -= change;
+                                aim -= change;
                                 up_flag = false;
-                            }
-                            else if down_flag == true {
+                            } else if down_flag == true {
                                 let change = part.parse::<i32>().unwrap();
-                                depth += change;
+                                aim += change;
                                 down_flag = false;
-                            },
+                            }
+                        }
                     }
                 }
             }
@@ -44,7 +45,8 @@ fn main() {
 
     println!("horizontal: {}", horizontal);
     println!("depth: {}", depth);
-    println!("total distance: {}", depth*horizontal);
+    println!("aim: {}", aim);
+    println!("total distance: {}", depth * horizontal);
 }
 
 // The output is wrapped in a Result to allow matching on errors
